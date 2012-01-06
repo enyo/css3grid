@@ -1,11 +1,40 @@
 (function($) {
   
-  this.CSS3Grid = function() {
-    this.test();
+  /**
+   * Constructor
+   */
+  this.CSS3Grid = function(container) {
+    this.maxXRotation = 60; // 60 will result in 30 degrees rotation in both directions.
+    this.maxYRotation = 60;
+
+    this.container = $(container);
+    this.container.data('css3grid', this);
+
+    this.containerWidth = this.container.width();
+    this.containerHeight = this.container.height();
+
+    var self = this;
+    this.container.mousemove(function(e) {self.mousemove(e, this);});
   };
 
   this.CSS3Grid.prototype = {
-    test: function() { alert('hi'); }
+    mousemove: function(e, element) {
+      var relativeX = e.pageX - element.offsetLeft;
+      var relativeY = e.pageY - element.offsetTop;
+      var xPercentage = 1 - Math.min(1, Math.max(0, (relativeX / this.containerWidth)));
+      var yPercentage = Math.min(1, Math.max(0, (relativeY / this.containerHeight)));
+      
+      var yDegrees = this.maxXRotation * xPercentage - this.maxXRotation / 2;
+      var xDegrees = this.maxYRotation * yPercentage - this.maxYRotation / 2;
+      
+      this.container.find('> div').css('webkitTransform', 'rotateX(' + xDegrees + 'deg) rotateY(' + yDegrees + 'deg)');
+    }
   };
+
+  $(function() {
+    $.each($('.css3grid'), function() {
+      new CSS3Grid(this);
+    });
+  })
 
 })(jQuery);
