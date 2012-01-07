@@ -14,13 +14,17 @@
     this.containerHeight = this.container.height();
 
     var self = this;
-    this.container.mousemove(function(e) {self.mousemove(e, this);});
+    $(document.body).mousemove(function(e) {
+      self.mousemove(e);
+    });
   };
 
   this.CSS3Grid.prototype = {
-    mousemove: function(e, element) {
-      var relativeX = e.pageX - element.offsetLeft;
-      var relativeY = e.pageY - element.offsetTop;
+    mousemove: function(e) {
+      var position = this.container.offset();
+
+      var relativeX = e.pageX - position.left;
+      var relativeY = e.pageY - position.top;
       var xPercentage = 1 - Math.min(1, Math.max(0, (relativeX / this.containerWidth)));
       var yPercentage = Math.min(1, Math.max(0, (relativeY / this.containerHeight)));
       

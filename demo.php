@@ -27,10 +27,6 @@
       }
     </style>
 
-    <script type="text/javascript">
-      $(function() { new CSS3Grid(); });
-    </script>
-
   </head>
   <body>
 
