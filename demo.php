@@ -59,7 +59,7 @@
         </div>
         <div class="cell">
           <div class="teaser"><img src="http://www.mediafaxfoto.ro/FolderComun//Cms/PaginiSite/19/stock-c4.gif" /></div>
-          <div class="content" style="width: 250px; height: 150px;"><h1>Hallo!</h1>Viel mehr content!</div>
+          <div class="content" style="width: 250px; height: 150px;"><h1>Small!</h1>Demonstration of small cell.</div>
         </div>
         <div class="cell">
           <div class="teaser"><p>Click me to see some code</p></div>
