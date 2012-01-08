@@ -99,9 +99,9 @@
   };
 
   $(window).load(function() {
-    setTimeout(function() { $.each($('.css3grid'), function() {
+    $.each($('.css3grid'), function() {
       new CSS3Grid(this);
-    })}, 500);
+    });
   })
 
 })(jQuery);
