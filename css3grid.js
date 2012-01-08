@@ -60,7 +60,8 @@
       this.tilt(-10, -10);
     },
     positionCells: function() {
-      this.container.height(this.containerHeight); // Making sure the container has the actual height set.
+      this.container.height(this.containerHeight).width(this.containerWidth); // Making sure the container has the actual height set.
+      this.container.find('> .cells').height(this.containerHeight).width(this.containerWidth); // Making sure the container has the actual height set.
 
       var self = this;
       $.each(this.cells, function(i) {
@@ -112,7 +113,7 @@
       }
     },
     tilt: function(xDegrees, yDegrees) {
-      this.container.find('> div').css('webkitTransform', 'rotateX(' + xDegrees + 'deg) rotateY(' + yDegrees + 'deg)');
+      this.container.find('> .cells').css('webkitTransform', 'rotateX(' + xDegrees + 'deg) rotateY(' + yDegrees + 'deg)');
     },
     attachClickObservers: function() {
       var self = this;
