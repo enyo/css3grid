@@ -72,7 +72,7 @@
       var self = this;
       $.each(this.container.find('> .cells > .cell'), function() {
         var cell = $(this);
-        cell.click(function() {self.cellClick(cell);});
+        cell.click(function() { self.cellClick(cell); });
       });
     },
     cellClick: function(cell) {

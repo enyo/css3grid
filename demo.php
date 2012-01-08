@@ -36,55 +36,55 @@
       <div class="cells">
 
         <div class="cell">
-          <div class="teaser"><p>Bla bla content</p></div>
+          <div class="teaser"><p><strong>This is CSS3Grid.</strong></p></div>
+          <div class="content"><h1>This is the content!</h1>More content can be displayed here!</div>
+        </div>
+        <div class="cell">
+          <div class="teaser"><p>You can mix any type of content...</p></div>
           <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
         </div>
         <div class="cell">
-          <div class="teaser"><p>Bla bla content more<br />content</p></div>
+          <div class="teaser"><p>...with different sizes<br/> and they are layouted<br />automatically by<br />the browsers layout<br />engine.</p></div>
           <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
         </div>
         <div class="cell">
-          <div class="teaser"><p>Bla bla content yoyoyo<br />Yo ho bo</p></div>
-          <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
-        </div>
-        <div class="cell">
-          <div class="teaser"><p>Bla bla content</p></div>
-          <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
-        </div>
-
-
-        <div class="cell">
-          <div class="teaser"><p>Bla bla content</p></div>
-          <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
-        </div>
-        <div class="cell">
-          <div class="teaser"><p>Bla bla content</p></div>
-          <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
-        </div>
-        <div class="cell">
-          <div class="teaser"><p>Bla bla content</p></div>
-          <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
-        </div>
-        <div class="cell">
-          <div class="teaser"><p>Bla bla content</p></div>
+          <div class="teaser"><img src="http://www.nemetschek.com/uploads/media/iStock_000003205700XSmall_01.jpg" /></div>
           <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
         </div>
 
+
         <div class="cell">
-          <div class="teaser"><p>Bla bla content</p></div>
+          <div class="teaser"><img src="http://www.mediafaxfoto.ro/FolderComun//Cms/PaginiSite/19/stock-c1.gif" /></div>
           <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
         </div>
         <div class="cell">
-          <div class="teaser"><p>Bla bla content</p></div>
+          <div class="teaser"><img src="http://www.mediafaxfoto.ro/FolderComun//Cms/PaginiSite/19/stock-c4.gif" /></div>
           <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
         </div>
         <div class="cell">
-          <div class="teaser"><p>Bla bla content</p></div>
+          <div class="teaser"><p>Some</p></div>
           <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
         </div>
         <div class="cell">
-          <div class="teaser"><p>Bla bla content</p></div>
+          <div class="teaser"><p>additional</p></div>
           <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
+        </div>
+
+        <div class="cell">
+          <div class="teaser"><p>cells</p></div>
+          <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
+        </div>
+        <div class="cell">
+          <div class="teaser"><p>to demonstrate</p></div>
+          <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
+        </div>
+        <div class="cell">
+          <div class="teaser"><p>how cool </p></div>
+          <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
+        </div>
+        <div class="cell">
+          <div class="content"><img src="http://www.idahostockimages.com/images/stock1.jpg" /></div>
+          <div class="teaser"><p>css3grid is</p></div>
         </div>
 
 
