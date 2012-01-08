@@ -62,11 +62,11 @@
           <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
         </div>
         <div class="cell">
-          <div class="teaser"><p>Some</p></div>
-          <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
+          <div class="teaser"><p>Click me to see some code</p></div>
+          <div class="content">Adding a new cell is as simple as adding this code to your html:<br /><br /><code><?php echo nl2br(htmlentities('<div class="cell">' . "\n" . '  <div class="teaser">The small cell</div>' . "\n" . '  <div class="content">The big cell</div>' . "\n" . '</div>')); ?></code></div>
         </div>
         <div class="cell">
-          <div class="teaser"><p>additional</p></div>
+          <div class="teaser"><p>Additional</p></div>
           <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
         </div>
 
