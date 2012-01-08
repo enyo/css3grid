@@ -30,6 +30,7 @@
   </head>
   <body>
 
+    <div id="debug"></div>
     <div class="css3grid loading">
       <div class="loading">Loading</div>
 

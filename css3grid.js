@@ -22,6 +22,10 @@
     });
     this.attachClickObservers();
     
+    $(window).bind('deviceorientation', function(e) { 
+      if (e.alpha) $('#debug').html('alpha: ' + e.alpha + ', beta: ' + e.beta + ', gamma: ' + e.gamma);
+    });
+    
     this.container.removeClass('loading');
     this.tilt(-10, -10);
   };
