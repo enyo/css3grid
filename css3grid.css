@@ -52,7 +52,9 @@
     left 0.3s ease-in-out;
   cursor: pointer;
 }
-
+.css3grid.initializing > .cells > .cell {
+  -webkit-transition: none;
+}
 .css3grid > .cells > .cell div p {
   padding: 10px;
   margin: 0;

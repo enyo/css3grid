@@ -23,6 +23,8 @@
 
       this.cells = this.container.find('> .cells > .cell');
 
+      this.container.addClass('initializing');
+
       $.each(this.cells, function() {
         // Go through all cells, and remove the content.
         // It will be added again as soon as the content is shown.
@@ -45,6 +47,8 @@
       if (!this.options.contentHeight) this.options.contentHeight = this.containerHeight;
 
       this.positionCells();
+      var self = this;
+      setTimeout(function() { self.container.removeClass('initializing'); }, 1);
 
       var self = this;
       $(document.body).mousemove(function(e) {
