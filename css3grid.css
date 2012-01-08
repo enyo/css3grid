@@ -88,7 +88,7 @@
   left: 0px;
   overflow: auto;
   display: none;
-  padding: 40px;
+  padding: 30px 40px;
 }
 .css3grid > .cells > .cell > .content > h1:first-of-type {
   margin-top: 0;

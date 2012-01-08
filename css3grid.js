@@ -82,6 +82,7 @@
         var contentElement = cell.find('> .content');
         contentElement.data('initialWidth', contentElement.width());
         contentElement.data('initialHeight', contentElement.height());
+        contentElement.css({ width: 'auto', height: 'auto' });
       });
       this.container.addClass('positioned-cells');
     },
