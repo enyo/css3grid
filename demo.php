@@ -80,11 +80,11 @@
         </div>
         <div class="cell">
           <div class="teaser"><p>how cool </p></div>
-          <div class="content"><h1>Hallo!</h1>Viel mehr content!</div>
+          <div class="content"><object width="560" height="315"><param name="movie" value="http://www.youtube.com/v/RGJkloHH1EI?version=3&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/RGJkloHH1EI?version=3&amp;hl=en_US" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true"></embed></object></div>
         </div>
         <div class="cell">
-          <div class="content"><img src="http://www.idahostockimages.com/images/stock1.jpg" /></div>
           <div class="teaser"><p>css3grid is</p></div>
+          <div class="content"><img src="http://www.idahostockimages.com/images/stock1.jpg" /></div>
         </div>
 
 
