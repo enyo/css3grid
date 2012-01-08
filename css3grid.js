@@ -138,6 +138,19 @@
       else this.unfocusCell();
     },
     focusCell: function(cell) {
+      
+      var self = this;
+      // Make the cells explode!
+      $.each(this.cells, function() {
+        var explodingCell = $(this);
+        var distanceFromY = explodingCell.data('positionedTop') - cell.data('positionedTop');
+        var distanceFromX = explodingCell.data('positionedLeft') - cell.data('positionedLeft');
+
+        var newTop = (explodingCell.data('positionedTop') + distanceFromY / 2) + 'px';
+        var newLeft = (explodingCell.data('positionedLeft') + distanceFromX / 2) + 'px';
+        explodingCell.css({top: newTop, left: newLeft});
+      });
+      
       this.focusedCell = cell;
       
       var contentElement = cell.find('> .content');
@@ -162,6 +175,14 @@
     },
     unfocusCell: function() {
       if (!this.focusedCell) return;
+
+      // Put the cells back at their original positions.
+      $.each(this.cells, function() {
+        var cell = $(this);
+        cell.css({top: cell.data('positionedTop') + 'px', left: cell.data('positionedLeft') + 'px'});
+      });
+      
+
       var cell = this.focusedCell;
       cell.removeClass('completed-transition focused').addClass('transitioning');
 
