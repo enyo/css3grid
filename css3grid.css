@@ -84,16 +84,18 @@
  */
 .css3grid > .cells > .cell > .content {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
+  top: 0px;
+  left: 0px;
   overflow: auto;
+  display: none;
+  padding: 40px;
 }
 .css3grid > .cells > .cell > .content > h1:first-of-type {
   margin-top: 0;
 }
-
+.css3grid > .cells > .cell > .content.no-frame {
+  padding: 0;
+}
 
 /**
  * Makes the cells pop out when you hover them.
@@ -108,11 +110,6 @@
 /**
  * Following are definitions for when a cell gets clicked -> thus focused
  */
-
-/* First make sure it is on the same plane again. */
-.css3grid.cell-focused > .cells > .cell.focused {
-  -webkit-transform: translateZ(0px);
-}
 /* Make the whole plane smoothly transition to flat. JS sets the transformation */
 .css3grid.cell-focused > .cells{
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
@@ -123,10 +120,13 @@
 }
 /* The focused one should stay */
 .css3grid.cell-focused > .cells > .cell.focused {
+  /* First make sure it is on the same plane again. */
+  -webkit-transform: translateZ(0px);
   opacity: 1;
-  top: 0 !important;
-  left: 0px !important;
   z-index: 1000;
+  margin: 0;
+  border: 0;
+  -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -139,7 +139,13 @@
   opacity: 0;
   -webkit-transition: opacity 0.5s ease-in-out;
 }
+.css3grid > .cells > .cell.transitioning > .content {
+  /* Also showing the content with display block during animation, so the opacity
+    transition will trigger as soon as the transition is completed */
+  display: block;
+}
 .css3grid.cell-focused > .cells > .cell.completed-transition > .content {
+  display: block;
   opacity: 1;
 }
 

@@ -8,7 +8,13 @@
   };
 
   this.CSS3Grid.prototype = {
+    defaultOptions: {
+      contentWidth: null, // If null, the css3grid container width & height are taken.
+      contentHeight: null
+    },
     initialize: function(container, options) {
+      this.options = $.extend(this.defaultOptions, options || {});
+      
       this.maxXRotation = 60; // 60 will result in 30 degrees rotation in both directions.
       this.maxYRotation = 60;
 
@@ -21,8 +27,9 @@
         // Go through all cells, and remove the content.
         // It will be added again as soon as the content is shown.
         var cell = $(this);
-        cell.data('content', cell.find('> .content').html());
-        cell.find('> .content').empty();
+        var contentElement = cell.find('> .content');
+        cell.data('content', contentElement.html());
+        contentElement.empty();
       });
 
       var self = this;
@@ -33,6 +40,9 @@
     fullyLoaded: function() {
       this.containerWidth = this.container.width();
       this.containerHeight = this.container.height();
+
+      if (!this.options.contentWidth) this.options.contentWidth = this.containerWidth;
+      if (!this.options.contentHeight) this.options.contentHeight = this.containerHeight;
 
       this.positionCells();
 
@@ -46,7 +56,7 @@
       this.tilt(-10, -10);
     },
     positionCells: function() {
-      this.container.height(this.container.height()); // Making sure the container has the actual height set.
+      this.container.height(this.containerHeight); // Making sure the container has the actual height set.
 
       var self = this;
       $.each(this.cells, function(i) {
@@ -54,7 +64,7 @@
         
         cell.data('initialWidth', cell.width());
         cell.data('initialHeight', cell.height());
-        
+
         var position = cell.position();
 
         setTimeout(function() {
@@ -63,12 +73,23 @@
           cell.height(cell.data('initialHeight'));
         }, 1);
 
-        cell.css({
-          left: position.left + 'px', 
-          top: position.top + 'px'
-        });
+        cell.data('positionedTop', position.top);
+        cell.data('positionedLeft', position.left);
+      
+        self.positionCell(cell);
+
+        // Now set the initial dimensions of the content element
+        var contentElement = cell.find('> .content');
+        contentElement.data('initialWidth', contentElement.width());
+        contentElement.data('initialHeight', contentElement.height());
       });
       this.container.addClass('positioned-cells');
+    },
+    positionCell: function(cell) {
+      cell.css({
+        left: cell.data('positionedLeft') + 'px', 
+        top: cell.data('positionedTop') + 'px'
+      });
     },
     mousemove: function(e) {
       var position = this.container.offset();
@@ -90,6 +111,16 @@
     },
     attachClickObservers: function() {
       var self = this;
+
+      $('html').click(function() {
+        // Click somewhere on the page.
+        self.unfocusCell();
+      });
+
+      $(this.container).click(function(event){
+        event.stopPropagation();
+      });
+
       $.each(this.cells, function() {
         var cell = $(this);
         cell.click(function() {
@@ -103,23 +134,37 @@
     },
     focusCell: function(cell) {
       this.focusedCell = cell;
-      cell.width(this.container.width());
-      cell.height(this.container.height());
-      cell.addClass('focused transitioning');
+      
+      var contentElement = cell.find('> .content');
+      
+      var cellWidth = contentElement.data('initialWidth') || this.options.contentWidth;
+      var cellHeight = contentElement.data('initialHeight') || this.options.contentHeight;
+      
+      cell.width(cellWidth);
+      cell.height(cellHeight);
+      cell.css({ top: Math.round((this.containerHeight - cellHeight) / 2) + 'px', left: Math.round((this.containerWidth - cellWidth) / 2) + 'px' });
+//      contentElement.width(cellWidth);
+//      contentElement.height(cellHeight);
+      
+      cell.addClass('focused transitioning').removeClass('completed-transition');
+      
       this.container.addClass('cell-focused');
       this.tilt(0, 0);
       cell.one('webkitTransitionEnd', function() {
         cell.addClass('completed-transition').removeClass('transitioning');
-        cell.find('> .content').html(cell.data('content'));
+        contentElement.html(cell.data('content'));
       });
     },
     unfocusCell: function() {
+      if (!this.focusedCell) return;
       var cell = this.focusedCell;
       cell.removeClass('completed-transition focused').addClass('transitioning');
 
       cell.find('> .content').empty();
       cell.width(this.focusedCell.data('initialWidth'));
       cell.height(this.focusedCell.data('initialHeight'));
+
+      this.positionCell(cell);
 
       this.container.removeClass('cell-focused');
       this.focusedCell = undefined;
