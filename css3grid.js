@@ -113,9 +113,7 @@
       this.yDegrees = this.maxXRotation * xPercentage - this.maxXRotation / 2;
       this.xDegrees = this.maxYRotation * yPercentage - this.maxYRotation / 2;
 
-      if (!this.focusedCell) {
-        this.tilt(this.xDegrees, this.yDegrees);
-      }
+      this.tilt(this.xDegrees, this.yDegrees);
     },
     devicemove: function(e) {
       // Beta: 90 is a complete vertical device.
@@ -125,12 +123,14 @@
       var beta = Math.max(minBeta, Math.min(maxBeta, e.beta)) - minBeta;
 
       beta = -(beta / ((maxBeta - minBeta) / 2) - 1);
-      
-      this.tilt(this.maxXRotation * beta, 0);
-      $('#debug').html('alpha: ' + Math.round(e.alpha) + ', beta: ' + Math.round(e.beta) + ', gamma: ' + Math.round(e.gamma));
+
+      // The gamma is normally between -40 and 40
+      var gamma = (Math.max(-1, Math.min(1, e.gamma / 40)));
+
+      this.tilt(this.maxXRotation * beta / 2, this.maxYRotation * gamma / 2);
     },
-    tilt: function(xDegrees, yDegrees) {
-      this.container.find('> .cells').css('webkitTransform', 'rotateX(' + xDegrees + 'deg) rotateY(' + yDegrees + 'deg)');
+    tilt: function(xDegrees, yDegrees, force) {
+      if (!this.focusedCell || force) this.container.find('> .cells').css('webkitTransform', 'rotateX(' + xDegrees + 'deg) rotateY(' + yDegrees + 'deg)');
     },
     attachClickObservers: function() {
       var self = this;
@@ -179,13 +179,11 @@
       cell.width(cellWidth);
       cell.height(cellHeight);
       cell.css({ top: Math.round((this.containerHeight - cellHeight) / 2) + 'px', left: Math.round((this.containerWidth - cellWidth) / 2) + 'px' });
-//      contentElement.width(cellWidth);
-//      contentElement.height(cellHeight);
       
       cell.addClass('focused transitioning').removeClass('completed-transition');
       
       this.container.addClass('cell-focused');
-      this.tilt(0, 0);
+      this.tilt(0, 0, true);
       cell.one('webkitTransitionEnd', function() {
         cell.addClass('completed-transition').removeClass('transitioning');
         contentElement.html(cell.data('content'));
