@@ -118,7 +118,15 @@
       }
     },
     devicemove: function(e) {
-      this.tilt(this.maxXRotation * e.beta / 90, 0);
+      // Beta: 90 is a complete vertical device.
+      // The normal motions are between 80 and 15. So lets make those the max rotation degrees.
+      
+      var minBeta = 15, maxBeta = 80;
+      var beta = Math.max(minBeta, Math.min(maxBeta, e.beta)) - minBeta;
+
+      beta = -(beta / ((maxBeta - minBeta) / 2) - 1);
+      
+      this.tilt(this.maxXRotation * beta, 0);
       $('#debug').html('alpha: ' + Math.round(e.alpha) + ', beta: ' + Math.round(e.beta) + ', gamma: ' + Math.round(e.gamma));
     },
     tilt: function(xDegrees, yDegrees) {
