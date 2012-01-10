@@ -44,80 +44,124 @@
   margin: 5px;
   border: 10px white solid;
   -webkit-transition:
-    -webkit-transform 0.1s ease-in-out,
-    opacity 0.2s ease-in-out,
+    -webkit-transform 0.3s ease-in-out,
+    opacity 0.3s ease-in-out,
     width 0.3s ease-in-out,
     height 0.3s ease-in-out,
     top 0.3s ease-in-out,
     left 0.3s ease-in-out;
   cursor: pointer;
 }
-
+.css3grid.initializing > .cells > .cell {
+  -webkit-transition: none;
+}
 .css3grid > .cells > .cell div p {
   padding: 10px;
   margin: 0;
 }
 
-.css3grid > .cells > .cell .teaser {
-  -webkit-transition: opacity 0.3s ease-in-out 0.2s;
-}
-.css3grid > .cells > .cell .content {
-  -webkit-transition: opacity 0.1s ease-in-out;
-}
-
-.css3grid.cell-focused > .cells > .cell .teaser {
-  -webkit-transition: opacity 0.1s ease-in-out;
-}
-.css3grid.cell-focused > .cells > .cell .content {
-  -webkit-transition: opacity 0.3s ease-in-out 0.2s;
-}
 
 
-.css3grid > .cells > .cell .content {
+/**
+ * The teaser
+ */
+
+.css3grid > .cells > .cell > .teaser {
+  -webkit-transition: opacity 0.3s ease-in-out;
+}
+/* The teaser should not be visible during transition */
+.css3grid > .cells > .cell.transitioning > .teaser {
+  opacity: 0;
+  -webkit-transition: none;
+}
+.css3grid > .cells > .cell.completed-transition > .teaser {
+  opacity: 1;
+}
+
+
+/**
+ * The content:
+ * It takes the whole width + height, and has overflow to auto. So it scrolls when
+ * necessary.
+ */
+.css3grid > .cells > .cell > .content {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
+  top: 0px;
+  left: 0px;
   overflow: auto;
+  display: none;
+  padding: 30px 40px;
 }
-.css3grid > .cells > .cell .content > h1:first-of-type {
+.css3grid > .cells > .cell > .content > h1:first-of-type {
   margin-top: 0;
 }
+.css3grid > .cells > .cell > .content.no-frame {
+  padding: 0;
+}
+
+/**
+ * Makes the cells pop out when you hover them.
+ */
+.css3grid > .cells > .cell:hover {
+  -webkit-transform: translateZ(30px);
+}
 
 
-.css3grid.cell-focused > .cells > .cell.focused .teaser,
-.css3grid > div > .cell .content {
-  display: none;
+
+
+/**
+ * Following are definitions for when a cell gets clicked -> thus focused
+ */
+/* Make the whole plane smoothly transition to flat. JS sets the transformation */
+.css3grid.cell-focused > .cells{
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+}
+/* Unfocused cells should disappear */
+.css3grid.cell-focused > .cells > .cell {
   opacity: 0;
 }
-.css3grid.cell-focused > .cells > .cell.focused .content,
-.css3grid > div > .cell.focused .teaser {
+/* The focused one should stay */
+.css3grid.cell-focused > .cells > .cell.focused {
+  /* First make sure it is on the same plane again. */
+  -webkit-transform: translateZ(0px);
+  opacity: 1;
+  z-index: 1000;
+  margin: 0;
+  border: 0;
+  -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+/**
+ * When a cell is focused, this makes sure the content gets faded in smoothly
+ */
+.css3grid > .cells > .cell > .content {
+  opacity: 0;
+  -webkit-transition: opacity 0.5s ease-in-out;
+}
+.css3grid > .cells > .cell.transitioning > .content {
+  /* Also showing the content with display block during animation, so the opacity
+    transition will trigger as soon as the transition is completed */
+  display: block;
+}
+.css3grid.cell-focused > .cells > .cell.completed-transition > .content {
   display: block;
   opacity: 1;
 }
 
 
-.css3grid > .cells > .cell:hover {
-  -webkit-transform: translateZ(30px);
-}
-.css3grid.cell-focused > .cells > .cell.focused {
-  -webkit-transform: translateZ(0px);
-}
-
-.css3grid.cell-focused > .cells{
-  -webkit-transition: -webkit-transform 0.3s ease-in-out;
-}
-.css3grid.cell-focused > .cells > .cell {
+.css3grid.cell-focused > .cells > .cell.focused > .teaser {
   opacity: 0;
 }
-.css3grid.cell-focused > .cells > .cell.focused {
-  opacity: 1;
-  top: 0 !important;
-  left: 0px !important;
-  z-index: 1000;
-}
 
+
+
+
+
+
+/* Since the cells are floating, there is a final div that clears the float */
 .css3grid > .cells > .css3grid-clear {
   clear: both;
 }
